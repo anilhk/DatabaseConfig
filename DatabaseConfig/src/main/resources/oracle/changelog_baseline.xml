@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+
+	<changeSet id="1" author="anil">
+
+		<comment>create the table user </comment>
+
+		<sql>
+
+			CREATE TABLE USER (
+			ID VARCHAR(100) NOT NULL,
+			FIRST_NAME VARCHAR(100) NOT NULL,
+			LAST_NAME VARCHAR(100) NOT NULL,
+			ADDRESS_1 VARCHAR(45) NOT NULL,
+			ADDRESS_2 VARCHAR(45) NOT NULL,
+			CITY VARCHAR(25) NOT NULL,
+			STATE VARCHAR(25) NOT NULL,
+			ZIPCODE VARCHAR(10) NOT NULL,
+			BIRTH_DATE DATETIME NOT NULL,
+			GENDER VARCHAR(10) NOT NULL,
+			EMAIL VARCHAR(200) NOT NULL,
+			VERIFY_EMAIL VARCHAR(200) NOT NULL,
+			PASSWORD VARCHAR(200) NOT NULL,
+			VERIFY_PASSWORD VARCHAR(200) NOT NULL,
+			CREATED_BY VARCHAR(25) NOT NULL DEFAULT 'System',
+			MODIFIED_BY VARCHAR(25) NOT NULL DEFAULT 'System',
+			CREATED_AT DATETIME NOT NULL DEFAULT NOW(),
+			MODIFIED_AT DATETIME NOT NULL DEFAULT NOW(),
+			CONSTRAINT USER_PK PRIMARY KEY(EMAIL)
+			);
+
+		</sql>
+
+		<rollback>
+			<sql>
+
+				DROP TABLE USER;
+
+			</sql>
+
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
+

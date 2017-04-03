@@ -1,0 +1,84 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.mydb</groupId>
+	<artifactId>DatabaseConfig</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<profiles>
+		<profile>
+			<id>MySQL-Profile</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>mysql</value>
+				</property>
+			</activation>
+			<properties>
+				<liquibase.properties>src/main/resources/mysql/liquibase.properties</liquibase.properties>
+			</properties>
+		</profile>
+		<profile>
+			<id>Oracle-Profile</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>env</name>
+					<value>oracle</value>
+				</property>
+			</activation>
+			<properties>
+				<liquibase.properties>src/main/resources/oracle/liquibase.properties</liquibase.properties>
+			</properties>
+		</profile>
+	</profiles>
+
+	<properties>
+		<mysql-version>5.1.6</mysql-version>
+		<oracle-version>12.1.0.2</oracle-version>
+		<liquibase-version>3.5.1</liquibase-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-version}</version>
+		</dependency>
+
+		<!-- http://www.springfuse.com/install-oracle-jdbc-driver-in-maven-repository.html -->
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>oracle</artifactId>
+			<version>${oracle-version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.liquibase/liquibase-core -->
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase-version}</version>
+		</dependency>
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase-version}</version>
+				<configuration>
+					<propertyFile>${liquibase.properties}</propertyFile>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>process-resources</phase>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
