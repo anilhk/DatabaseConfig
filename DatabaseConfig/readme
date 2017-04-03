@@ -1,0 +1,20 @@
+## project description
+# to use liquibase (an open source database independent library to tract all database related activities)
+
+## Project configuration
+
+# 2 profiles 
+@ 1. mysql profile to execute scripts in mysql database
+@ 2. oracle profile to execute scripts in Oracle database
+
+# execute mysql 
+	
+	mvn -Denv=mysql liquibase:dropAll : drop all the records in mysql database
+	mvn -Denv=mysql liquibase:update : update all the records in mysql database
+	
+# execute oracle 
+	
+	mvn -Denv=oracle liquibase:dropAll : drop all the records in oracle database
+	mvn -Denv=oracle liquibase:update : update all the records in oracle database
+	
+	
